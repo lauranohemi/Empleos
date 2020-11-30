@@ -4,7 +4,7 @@ import java.util.regex.Pattern;
 
 import org.apache.tomcat.util.buf.CharsetCache;
 
-import mx.edu.uacm.exceptions.ExceptionCategoria;
+import mx.edu.uacm.exceptions.ClaseException;
 
 /**
  * 
@@ -24,7 +24,7 @@ public class Categoria {
     	
     }
     
-	public Categoria(String nombre, String descripcion) throws ExceptionCategoria {
+	public Categoria(String nombre, String descripcion) throws ClaseException {
 		setNombre(nombre);
 		setDescripcion(descripcion);
 	}
@@ -33,22 +33,22 @@ public class Categoria {
 		return nombre;
 	}
 	
-	public void setNombre(String nombre) throws ExceptionCategoria {
+	public void setNombre(String nombre) throws ClaseException {
 		if (Pattern.matches(EXP_REGULAR_NOMBRE, nombre)) 
 			this.nombre = nombre;
 		else 
-			throw new ExceptionCategoria("Error: " + nombre);
+			throw new ClaseException("Error: " + nombre);
 	}
 	
 	public String getDescripcion() {
 		return descripcion;
 	}
 	
-	public void setDescripcion(String descripcion) throws ExceptionCategoria {
+	public void setDescripcion(String descripcion) throws ClaseException {
 		if (Pattern.matches(EXP_REGULAR_DESCRIPCION, descripcion)) 
 			this.descripcion = descripcion;
 		else 
-			throw new ExceptionCategoria("Error: " + descripcion);
+			throw new ClaseException("Error: " + descripcion);
 	}
 
 	@Override

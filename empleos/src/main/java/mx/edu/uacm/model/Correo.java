@@ -2,7 +2,7 @@ package mx.edu.uacm.model;
 
 import java.util.regex.Pattern;
 
-import mx.edu.uacm.exceptions.ExceptionCategoria;
+import mx.edu.uacm.exceptions.ClaseException;
 
 public class Correo {
 	
@@ -20,7 +20,7 @@ public class Correo {
 		
 	}
 
-	public Correo(String destinatario, String emisor, String asunto, String cuerpo) throws ExceptionCategoria {
+	public Correo(String destinatario, String emisor, String asunto, String cuerpo) throws ClaseException {
 		setDestinatario(destinatario);
 		setEmisor(emisor);
 		setAsunto(asunto);
@@ -31,44 +31,44 @@ public class Correo {
 		return destinatario;
 	}
 
-	public void setDestinatario(String destinatario) throws ExceptionCategoria {
+	public void setDestinatario(String destinatario) throws ClaseException {
 		if (Pattern.matches(EXP_REGULAR_DESTINATARIO, destinatario)) 
 			this.destinatario = destinatario;
 		else 
-			throw new ExceptionCategoria("Error: " + destinatario);
+			throw new ClaseException("Error: " + destinatario);
 	}
 
 	public String getEmisor() {
 		return emisor;
 	}
 
-	public void setEmisor(String emisor) throws ExceptionCategoria {
+	public void setEmisor(String emisor) throws ClaseException {
 		if (Pattern.matches(EXP_REGULAR_EMISOR, emisor)) 
 			this.emisor = emisor;
 		else 
-			throw new ExceptionCategoria("Error: " + emisor);
+			throw new ClaseException("Error: " + emisor);
 	}
 
 	public String getAsunto() {
 		return asunto;
 	}
 
-	public void setAsunto(String asunto) throws ExceptionCategoria {
+	public void setAsunto(String asunto) throws ClaseException {
 		if (Pattern.matches(EXP_REGULAR_ASUNTO, asunto)) 
 			this.asunto = asunto;
 		else 
-			throw new ExceptionCategoria("Error: " + asunto);
+			throw new ClaseException("Error: " + asunto);
 	}
 
 	public String getCuerpo() {
 		return cuerpo;
 	}
 
-	public void setCuerpo(String cuerpo) throws ExceptionCategoria {
+	public void setCuerpo(String cuerpo) throws ClaseException {
 		if (Pattern.matches(EXP_REGULAR_CUERPO, cuerpo)) 
 			this.cuerpo = cuerpo;
 		else 
-			throw new ExceptionCategoria("Error: " + cuerpo);
+			throw new ClaseException("Error: " + cuerpo);
 	}
 
 	@Override

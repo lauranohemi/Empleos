@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 
 import org.junit.jupiter.api.Test;
 
-import mx.edu.uacm.exceptions.ExceptionCategoria;
+import mx.edu.uacm.exceptions.ClaseException;
 import utils.Utileria;
 
 public class CategoriaTest {
@@ -16,7 +16,7 @@ public class CategoriaTest {
 	static Logger logger = Logger.getLogger("class CategoriaTest");
 	
 	@Test
-	public void testSetNombreCasoPruebaUno() throws ExceptionCategoria {
+	public void testSetNombreCasoPruebaUno() throws ClaseException {
 		logger.log(Level.INFO, "testSetNombreCasoPruebaUno");
 		Categoria c = new Categoria("Desarrollo Móvil", 
 				"Se solicitan cincuenta vacantes para desarrollo de producto robusto");
@@ -26,26 +26,26 @@ public class CategoriaTest {
 	}
 	
 	@Test
-	public void testSetNombreCasoPruebaDos() throws ExceptionCategoria {
+	public void testSetNombreCasoPruebaDos() throws ClaseException {
 		logger.log(Level.INFO, "testSetNombreCasoPruebaDos");
 		Categoria c = new Categoria();
-		assertThrows(ExceptionCategoria.class, 
+		assertThrows(ClaseException.class, 
 				()->c.setNombre("75545ABC"));
 	}
 	
 	@Test
-	public void testSetNombreCasoPruebaTres() throws ExceptionCategoria {
+	public void testSetNombreCasoPruebaTres() throws ClaseException {
 		logger.log(Level.INFO, "testSetNombreCasoPruebaTres");
 		Categoria c = new Categoria();
-		assertThrows(ExceptionCategoria.class,
+		assertThrows(ClaseException.class,
 				()->c.setNombre("1"));
 	}
 	
 	@Test
-	public void testSetNombreCasoPruebaCuatro()  throws ExceptionCategoria {
+	public void testSetNombreCasoPruebaCuatro()  throws ClaseException {
 		logger.log(Level.INFO, "testSetNombreCasoPruebaCuatro");
 		Categoria c = new Categoria();
-		assertThrows(ExceptionCategoria.class,
+		assertThrows(ClaseException.class,
 				()->c.setNombre("Desarrollo móvil, con capacidades de  DEVOPS" 
 		+ Utileria.agregarCaracteres(350)));
 	}

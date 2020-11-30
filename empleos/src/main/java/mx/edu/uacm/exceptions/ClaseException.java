@@ -1,10 +1,10 @@
 package mx.edu.uacm.exceptions;
 
-public class ExceptionCategoria extends Exception {
+public class ClaseException extends Exception {
 
 	private static final long serialVersionUID = 1L;
 	
-	public ExceptionCategoria(String mensaje) {
+	public ClaseException(String mensaje) {
 		super(mensaje);
 	}
 	
