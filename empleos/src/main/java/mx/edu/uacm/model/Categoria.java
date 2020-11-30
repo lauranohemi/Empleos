@@ -1,5 +1,10 @@
 package mx.edu.uacm.model;
 
+import java.util.regex.Pattern;
+
+import org.apache.tomcat.util.buf.CharsetCache;
+
+import mx.edu.uacm.exceptions.ExceptionCategoria;
 
 /**
  * 
@@ -12,29 +17,38 @@ public class Categoria {
 	private String nombre;
     private String descripcion;
     
+    private final String EXP_REGULAR_NOMBRE ="[A-Za-zÁÉÍÓÚñáéíóúÑ ]{2,35}";
+    private final String EXP_REGULAR_DESCRIPCION = "[a-zA-Záéíóú0-9]?([a-zA-Z0-9áéíóú^\\n. ]){5,350}";
+    
     public Categoria() {
     	
     }
     
-	public Categoria(String nombre, String descripcion) {
-		this.nombre = nombre;
-		this.descripcion = descripcion;
+	public Categoria(String nombre, String descripcion) throws ExceptionCategoria {
+		setNombre(nombre);
+		setDescripcion(descripcion);
 	}
 	
 	public String getNombre() {
 		return nombre;
 	}
 	
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setNombre(String nombre) throws ExceptionCategoria {
+		if (Pattern.matches(EXP_REGULAR_NOMBRE, nombre)) 
+			this.nombre = nombre;
+		else 
+			throw new ExceptionCategoria("Error: " + nombre);
 	}
 	
 	public String getDescripcion() {
 		return descripcion;
 	}
 	
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+	public void setDescripcion(String descripcion) throws ExceptionCategoria {
+		if (Pattern.matches(EXP_REGULAR_DESCRIPCION, descripcion)) 
+			this.descripcion = descripcion;
+		else 
+			throw new ExceptionCategoria("Error: " + descripcion);
 	}
 
 	@Override

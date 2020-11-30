@@ -26,10 +26,9 @@ public class Usuario {
 	public Usuario() {
 		
 	}
-
+	
 	public Usuario(String username, String nombre, String apellido, String email, String password, Integer estatus,
 			Calendar fechaRegistro, List<Perfil> perfiles) {
-		super();
 		this.username = username;
 		this.nombre = nombre;
 		this.apellido = apellido;
