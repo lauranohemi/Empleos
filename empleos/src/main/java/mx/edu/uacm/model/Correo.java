@@ -1,5 +1,9 @@
 package mx.edu.uacm.model;
 
+import java.util.regex.Pattern;
+
+import mx.edu.uacm.exceptions.ExceptionCategoria;
+
 public class Correo {
 	
 	private String destinatario; 
@@ -7,48 +11,64 @@ public class Correo {
 	private String asunto;
 	private String cuerpo;
 	
+	private final String EXP_REGULAR_DESTINATARIO ="^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$";
+	private final String EXP_REGULAR_EMISOR ="^([a-zA-ZÁÉÍÓÚñáéíóúÑ\\s]?[A-Za-zÁÉÍÓÚñáéíóúÑ]){2,35}$";
+	private final String EXP_REGULAR_ASUNTO ="^[a-zA-Záéíóú]?([a-zA-Záéíóú^\\n. ]){2,35}$";
+	private final String EXP_REGULAR_CUERPO ="^[a-zA-Záéíóú]?([a-zA-Záéíóú^\\n. ]){2,350}$";
+	
 	public Correo () {
 		
 	}
 
-	public Correo(String destinatario, String emisor, String asunto, String cuerpo) {
-		super();
-		this.destinatario = destinatario;
-		this.emisor = emisor;
-		this.asunto = asunto;
-		this.cuerpo = cuerpo;
+	public Correo(String destinatario, String emisor, String asunto, String cuerpo) throws ExceptionCategoria {
+		setDestinatario(destinatario);
+		setEmisor(emisor);
+		setAsunto(asunto);
+		setCuerpo(cuerpo);
 	}
 
 	public String getDestinatario() {
 		return destinatario;
 	}
 
-	public void setDestinatario(String destinatario) {
-		this.destinatario = destinatario;
+	public void setDestinatario(String destinatario) throws ExceptionCategoria {
+		if (Pattern.matches(EXP_REGULAR_DESTINATARIO, destinatario)) 
+			this.destinatario = destinatario;
+		else 
+			throw new ExceptionCategoria("Error: " + destinatario);
 	}
 
 	public String getEmisor() {
 		return emisor;
 	}
 
-	public void setEmisor(String emisor) {
-		this.emisor = emisor;
+	public void setEmisor(String emisor) throws ExceptionCategoria {
+		if (Pattern.matches(EXP_REGULAR_EMISOR, emisor)) 
+			this.emisor = emisor;
+		else 
+			throw new ExceptionCategoria("Error: " + emisor);
 	}
 
 	public String getAsunto() {
 		return asunto;
 	}
 
-	public void setAsunto(String asunto) {
-		this.asunto = asunto;
+	public void setAsunto(String asunto) throws ExceptionCategoria {
+		if (Pattern.matches(EXP_REGULAR_ASUNTO, asunto)) 
+			this.asunto = asunto;
+		else 
+			throw new ExceptionCategoria("Error: " + asunto);
 	}
 
 	public String getCuerpo() {
 		return cuerpo;
 	}
 
-	public void setCuerpo(String cuerpo) {
-		this.cuerpo = cuerpo;
+	public void setCuerpo(String cuerpo) throws ExceptionCategoria {
+		if (Pattern.matches(EXP_REGULAR_CUERPO, cuerpo)) 
+			this.cuerpo = cuerpo;
+		else 
+			throw new ExceptionCategoria("Error: " + cuerpo);
 	}
 
 	@Override

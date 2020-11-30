@@ -2,7 +2,6 @@ package mx.edu.uacm.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -10,7 +9,6 @@ import java.util.logging.Logger;
 import org.junit.jupiter.api.Test;
 
 import mx.edu.uacm.exceptions.ExceptionCategoria;
-import net.bytebuddy.implementation.bytecode.Throw;
 import utils.Utileria;
 
 public class CategoriaTest {
