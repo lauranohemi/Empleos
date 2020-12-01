@@ -3,6 +3,9 @@ package mx.edu.uacm.model;
 import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.regex.Pattern;
+
+import mx.edu.uacm.exceptions.ClaseException;
 
 /**
  * 
@@ -23,19 +26,24 @@ public class Usuario {
 	
 	private List<Perfil> perfiles;
 	
+	private final String EXP_REGULAR_USERNAME = "^[a-zA-Z0-9][A-Za-z0-9]{4,15}$";
+	private final String EXP_REGULAR_NOMBRE_APELLIDO = "^([A-Za-zÁÉÍÓÚñáéíóúÑ]*?[A-Za-zÁÉÍÓÚñáéíóúÑ\\']+[\\s])+([A-Za-zÁÉÍÓÚñáéíóúÑ]*?[A-Za-zÁÉÍÓÚñáéíóúÑ\\'])+[\\s]?([A-Za-zÁÉÍÓÚñáéíóúÑ]*?[A-Za-zÁÉÍÓÚñáéíóúÑ\\'])?$";
+	private final String EXP_REGULAR_EMAIL = "^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$";
+	private final String EXP_REGULAR_PASSWORD = "^(?=.*\\d)(?=.*[\\u0021-\\u002b\\u003c-\\u0040-\\u005F])(?=.*[A-Z])(?=.*[a-z])\\S{8,16}$";
+	
 	public Usuario() {
 		
 	}
 	
 	public Usuario(String username, String nombre, String apellido, String email, String password, Integer estatus,
-			Calendar fechaRegistro, List<Perfil> perfiles) {
-		this.username = username;
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.email = email;
-		this.password = password;
-		this.estatus = estatus;
-		this.fechaRegistro = fechaRegistro;
+			Calendar fechaRegistro, List<Perfil> perfiles) throws ClaseException {
+		setUsername(username);
+		setNombre(nombre);
+		setApellido(apellido);
+		setEmail(email);
+		setPassword(password);
+		setEstatus(estatus);
+		setFechaRegistro(fechaRegistro);
 		this.perfiles = perfiles;
 	}
 
@@ -43,48 +51,66 @@ public class Usuario {
 		return username;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUsername(String username) throws ClaseException {
+		if (Pattern.matches(EXP_REGULAR_USERNAME, username))
+			this.username = username;
+		else
+			throw new ClaseException("Error :" + username + Usuario.class);
 	}
 
 	public String getNombre() {
 		return nombre;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setNombre(String nombre) throws ClaseException {
+		if (Pattern.matches(EXP_REGULAR_NOMBRE_APELLIDO, nombre))
+			this.nombre = nombre;
+		else
+			throw new ClaseException("Error :" + nombre + Usuario.class);
 	}
 
 	public String getApellido() {
 		return apellido;
 	}
 
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
+	public void setApellido(String apellido) throws ClaseException {
+		if (Pattern.matches(EXP_REGULAR_NOMBRE_APELLIDO, apellido))
+			this.apellido = apellido;
+		else
+			throw new ClaseException("Error :" + apellido + Usuario.class);
 	}
 
 	public String getEmail() {
 		return email;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setEmail(String email) throws ClaseException {
+		if (Pattern.matches(EXP_REGULAR_EMAIL, email))
+			this.email = email;
+		else
+			throw new ClaseException("Error :" + email + Usuario.class);
 	}
 
 	public String getPassword() {
 		return password;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPassword(String password) throws ClaseException {
+		if (Pattern.matches(EXP_REGULAR_PASSWORD, password))
+			this.password = password;
+		else
+			throw new ClaseException("Error :" + password + Usuario.class);	
 	}
 
 	public Integer getEstatus() {
 		return estatus;
 	}
 
-	public void setEstatus(Integer estatus) {
-		this.estatus = estatus;
+	public void setEstatus(Integer estatus) throws ClaseException {
+		if (estatus == 0 || estatus == 1)
+			this.estatus = estatus;
+		else
+			throw new ClaseException("Error :" + estatus + Usuario.class);	
 	}
 
 	public Calendar getFechaRegistro() {

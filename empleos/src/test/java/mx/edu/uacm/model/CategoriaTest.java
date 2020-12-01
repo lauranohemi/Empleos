@@ -1,6 +1,7 @@
 package mx.edu.uacm.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.logging.Level;
@@ -14,6 +15,28 @@ import utils.Utileria;
 public class CategoriaTest {
 	
 	static Logger logger = Logger.getLogger("class CategoriaTest");
+	
+	@Test
+	public void testCosntrutorCategoriaUno() throws ClaseException {
+		logger.log(Level.INFO, "testCosntrutorCategoriaUbo");
+		Categoria c = new Categoria (
+				"Desarrollo Móvil", 
+				"Se solicita desarrollador mólvil con experiencia en Adnroid Strudio y lenguaje Java o Kotlin");
+		Categoria c2 = new Categoria (
+				"Desarrollo Móvil", 
+				"Se solicita desarrollador mólvil con experiencia en Adnroid Strudio y lenguaje Java o Kotlin");
+		assertEquals(c, c2);
+	}
+	
+	@Test
+	public void testCosntrutorCategoriaDos() throws ClaseException {
+		logger.log(Level.INFO, "testCosntrutorCategoriaDos");
+		Categoria c = new Categoria (
+				"Desarrollo Móvil", 
+				"Se solicita desarrollador mólvil con experiencia en Adnroid Strudio y lenguaje Java o Kotlin");
+		Usuario u = new Usuario();
+		assertNotEquals(c, u);
+	}
 	
 	@Test
 	public void testSetNombreCasoPruebaUno() throws ClaseException {
