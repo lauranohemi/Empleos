@@ -4,9 +4,8 @@ public class Utileria {
 	
 	public static String agregarCaracteres(int numCaracteres) {
 		String value = "";
-		for (int i = 0; i < numCaracteres; i++) {
+		for (int i = 0; i < numCaracteres; i++) 
 			value += "a";
-		}
 		return value;
 	}
 	

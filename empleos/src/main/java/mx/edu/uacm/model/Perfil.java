@@ -1,5 +1,10 @@
 package mx.edu.uacm.model;
 
+import java.time.Period;
+import java.util.regex.Pattern;
+
+import mx.edu.uacm.exceptions.ClaseException;
+
 /**
  * 
  * @author Chávez Morelos Noé Baldemar
@@ -9,20 +14,25 @@ public class Perfil {
 	
 	private String perfil;
 	
+	private final String EXP_REGULAR_PERFIL = "^[a-zA-Záéíóú]?([a-zA-Záéíóú^\\n. ]){2,350}$";
+	
 	public Perfil() {
 		
 	}
 
-	public Perfil(String perfil) {
-		this.perfil = perfil;
+	public Perfil(String perfil) throws ClaseException {
+		setPerfil(perfil);
 	}
 
 	public String getPerfil() {
 		return perfil;
 	}
 
-	public void setPerfil(String perfil) {
-		this.perfil = perfil;
+	public void setPerfil(String perfil) throws ClaseException {
+		if (Pattern.matches(EXP_REGULAR_PERFIL, perfil)) 
+			this.perfil = perfil;
+		else 
+			throw new ClaseException("Error: " + perfil + Perfil.class);
 	}
 
 	@Override

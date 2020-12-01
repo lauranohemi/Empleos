@@ -1,6 +1,9 @@
 package mx.edu.uacm.model;
 
 import java.util.Calendar;
+import java.util.regex.Pattern;
+
+import mx.edu.uacm.exceptions.ClaseException;
 
 /**
  * 
@@ -15,19 +18,21 @@ public class Solicitud {
 	private String comentarios;
 	private String archivo;
 	
+	private final String EXP_REGULAR_COMENTARIOS = "^[a-zA-Záéíóú]?([a-zA-Záéíóú^\\n. ]){2,350}$";
+	private final String EXP_REGULAR_ARCHIVO = "^[a-z0z9 ]+?[a-z0z9]\\.(doc|DOC|pdf|PDF)$";
+	
 	public Solicitud() {
 		
 	}
 	
 	public Solicitud(Calendar fecha) {
-		this.fecha=fecha;
+		setFecha(fecha);
 	}
 
-	public Solicitud(Calendar fecha, String comentarios, String archivo) {
-		super();
-		this.fecha = fecha;
-		this.comentarios = comentarios;
-		this.archivo = archivo;
+	public Solicitud(Calendar fecha, String comentarios, String archivo) throws ClaseException {
+		setFecha(fecha);
+		setComentarios(comentarios);
+		setArchivo(archivo);
 	}
 
 	public Calendar getFecha() {
@@ -42,16 +47,22 @@ public class Solicitud {
 		return comentarios;
 	}
 
-	public void setComentarios(String comentarios) {
+	public void setComentarios(String comentarios) throws ClaseException {
+		if (Pattern.matches(EXP_REGULAR_COMENTARIOS, comentarios)) 
 		this.comentarios = comentarios;
+	else 
+		throw new ClaseException("Error: " + archivo + Solicitud.class);
 	}
 
 	public String getArchivo() {
 		return archivo;
 	}
 
-	public void setArchivo(String archivo) {
-		this.archivo = archivo;
+	public void setArchivo(String archivo) throws ClaseException {
+		if (Pattern.matches(EXP_REGULAR_ARCHIVO, archivo)) 
+			this.archivo = archivo;
+		else 
+			throw new ClaseException("Error: " + archivo + Solicitud.class);
 	}
 
 	@Override
